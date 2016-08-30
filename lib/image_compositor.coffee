@@ -51,7 +51,8 @@ class ImageCompositor
       )
 
       doCompositing = =>
-        compositeArgs = [ "-gravity", "center", @opts.overlay_src, OUTPUT_PATH, "-geometry", TOTAL_WIDTH + "x" + TOTAL_HEIGHT, FINAL_OUTPUT_PATH ]
+        if Math.random() > 0.5 then overlay_src = 'public/images/overlay1.png' else overlay_src = 'public/images/overlay2.png'
+        compositeArgs = [ "-gravity", "center", overlay_src, OUTPUT_PATH, "-geometry", TOTAL_WIDTH + "x" + TOTAL_HEIGHT, FINAL_OUTPUT_PATH ]
         console.log("executing: composite " + compositeArgs.join(" "))
         exec "composite " + compositeArgs.join(" "), (error, stderr, stdout) ->
           throw error  if error
